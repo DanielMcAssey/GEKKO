@@ -22,11 +22,20 @@
 }());
 
 
+function GetHost() {
+	var urlProtocol = "http://"
+	if(window.location.protocol == 'https:')
+		urlProtocol = "https://"
+
+	return (urlProtocol + window.location.hostname);
+}
+
+
 function AddLinks(linkArray, lastID) {
 	var newLastID = lastID;
 	for(var i = 0; i < linkArray.length; i++) {
 		var trHTML = '<tr data-rowID="' + linkArray[i].id + '" data-linkCode="' + linkArray[i].code + '" class="fresh">';
-		trHTML += "<td>" + linkArray[i].code + "</td>";
+		trHTML += '<td><a href="' + (GetHost() + '/' + linkArray[i].code) + '" target="blank">' + linkArray[i].code + '</a></td>';
 		trHTML += "<td>" + linkArray[i].clicks + "</td>";
 		trHTML += "<td>" + linkArray[i].destination + "</td>";
 		trHTML += '<td><div class="btn-group">';
@@ -168,14 +177,8 @@ function Click_View(e) {
 	$(e).button('loading');
 	var linkID = $(e).data("id");
 	var urlCode = $('tr[data-rowID="' + linkID + '"]').data("linkcode");
-	var urlProtocol = "http://"
-	if(window.location.protocol == 'https:')
-		urlProtocol = "https://"
-
-	var urlDestination = urlProtocol + window.location.hostname + "/" + urlCode;
-	var redirectWindow = window.open(urlDestination, '_blank');
+	var redirectWindow = window.open(GetHost() + "/" + urlCode, '_blank');
     redirectWindow.location;
-
 	$('tr[data-rowID="' + linkID + '"]').addClass("link-viewed");
 	$(e).button('reset');
 }

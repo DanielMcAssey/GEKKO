@@ -62,7 +62,7 @@
 		<?php $lastLinkID = $lastShortenedLinkID; ?>
 		@foreach ($shortenedLinks as $selectedLink)
 		<tr data-rowID="{{{ $selectedLink->id }}}" data-linkCode="{{{ $selectedLink->code }}}">
-			<td>{{{ $selectedLink->code }}}</td>
+			<td><a href="{{ URL::to('/'.$selectedLink->code, null, Config::get("app.use_https")) }}" target="_blank" >{{{ $selectedLink->code }}}</a></td>
 			<td>{{{ $selectedLink->clicks }}}</td>
 			<td>{{{ $selectedLink->destination }}}</td>
 			<td>
