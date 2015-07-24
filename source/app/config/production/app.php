@@ -26,6 +26,6 @@ return array(
 	|
 	*/
 
-	'url' => 'http://your.url.here',
+	'url' => 'https://dcm.li',
 
 );
