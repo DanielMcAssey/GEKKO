@@ -1,7 +1,7 @@
 #!/bin/sh
 
 VAR_ENVDIR="/home/glokon/domains/dcm.li/root.dcm/env.root/"
-VAR_PUBLISHDIR="/home/glokon/domains/dcm.li/root.dcm/app.root/"
+VAR_PUBLISHDIR="/home/glokon/domains/dcm.li/root.dcm/app.root/source/"
 VAR_VERSION_INFO="$BUILD_NUMBER-$GIT_BRANCH-$GIT_COMMIT"
 VAR_GIT_BRANCH="master"
 
