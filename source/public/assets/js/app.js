@@ -83,6 +83,44 @@ function RemoveOldActiveViewLink() {
 }
 
 
+function ShortenURL(e) {
+	$(e).button('loading');
+
+	//Reset alert boxes
+	$("form#form_shorten_url div#error_box span#message").text("");
+	$("form#form_shorten_url div#error_box").hide();
+
+	var new_url = $('form#form_shorten_url input[name="url_input"]').val();
+
+	$.ajax({
+		type: "POST",
+		cache: false,
+		url : "/manage/ajax/link/shorten",
+		data : { url: new_url},
+		success: function(result) {
+			if(typeof result.ok !== 'undefined') {
+				$("#shorten_url_output").val(result.ok.data.url);
+			}
+		}
+	}).fail(function(result) {
+		if(typeof result.responseJSON.error !== 'undefined') {
+			var errorBoxElement = $("form#form_shorten_url div#error_box");
+			var errorBoxText = $("form#form_shorten_url div#error_box span#message");
+			errorBoxText.text("");
+			if(typeof result.responseJSON.error.data !== 'undefined') {
+				for (var key in result.responseJSON.error.data.validator_messages) {
+					var obj = result.responseJSON.error.data.validator_messages[key];
+					errorBoxText.append("<br /> - " + obj[0]);
+				}
+			}
+			errorBoxElement.show();
+		}
+	}).always(function() {
+		$(e).button('reset');
+	});
+}
+
+
 function ChangePassword(e) {
 	$(e).button('loading');
 
@@ -264,6 +302,14 @@ function InitializeApp() {
 		$("form#form_edit_profile div#success_box span#message").text("");
 		$("form#form_edit_profile div#success_box").hide();
 	});
+	$('#modal_shorten_url').on('hidden.bs.modal', function () {
+		$("#shorten_url_input").val("");
+		$("#shorten_url_output").val("");
+	});
+	$("button#btn_shorten_url").click(function(e) {
+		e.preventDefault();
+		ShortenURL(this);
+	});
 	$("button#btn_edit_profile").click(function(e) {
 		e.preventDefault();
 		EditProfile(this);
@@ -299,6 +345,11 @@ function InitializeApp() {
 		e.preventDefault();
 		$("#api_key_input").focus();
 		$("#api_key_input").select();
+	});
+	$("a#shorten_url_selectall").click(function(e) {
+		e.preventDefault();
+		$("#shorten_url_output").focus();
+		$("#shorten_url_output").select();
 	});
 	// Delegated Clicks
 	$('table#link_list').on('click', 'button#link_view', function() {

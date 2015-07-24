@@ -82,6 +82,11 @@ Route::group(['prefix' => 'manage', 'namespace' => 'GEKKO'], function() {
 				'uses' => 'UserController@postUpdateProfile'
 			) );
 
+			Route::post( 'link/shorten', array(
+				'as' => 'link.shortenLink',
+				'uses' => 'LinkController@postShorten'
+			) );
+
 			Route::post( 'link/delete', array(
 				'as' => 'link.deleteLink',
 				'uses' => 'LinkController@postDelete'

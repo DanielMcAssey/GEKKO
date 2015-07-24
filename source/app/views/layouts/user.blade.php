@@ -110,16 +110,15 @@
 							</div>
 							<div class="panel-body">
 @endif
-								@yield('content')
-
+	@yield('content')
 @if(Auth::check())
 							</div>
 						</div>
 					</div>
-@include('modals.shortenlink')
-@include('modals.apikey')
-@include('modals.changepw')
-@include('modals.editprofile')
+	@include('modals.shortenlink')
+	@include('modals.apikey')
+	@include('modals.changepw')
+	@include('modals.editprofile')
 @endif
 				</div>
 			</div>
@@ -130,7 +129,6 @@
 				<ul class="glokon-footer">
 					<li>
 						{{{ Lang::get('site.title') }}}
-
 						<span id="footer-build-information">// v{{ Config::get("app.version") }}</span>
 					</li>
 @if(Auth::check())
@@ -162,6 +160,6 @@
 		{{ Minify::javascript('/assets/js/admin.js') }}
 	@endif
 @endif
-        @yield('scripts')
+@yield('scripts')
 	</body>
 </html>

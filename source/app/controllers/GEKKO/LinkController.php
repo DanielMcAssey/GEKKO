@@ -3,6 +3,49 @@ namespace GEKKO;
 
 class LinkController extends \BaseController {
 
+	/**
+	 * Shorten a new URL
+	 *
+	 * @return Response
+	 */
+	public function postShorten()
+	{
+		if(!\Auth::check())
+			return \Response::json(array('error' => array('code' => 'NOT-AUTH', 'http_code' => '403', 'message' => 'Forbidden')), 403);
+
+		$shortenValidator = \Validator::make(\Input::all(),
+			array(
+				'url' 			=> 'required|active_url'
+			)
+		);
+
+		if($shortenValidator->fails())
+			return \Response::json(array('error' => array('code' => 'SHORTEN-VALIDATOR-FAILED', 'http_code' => '400', 'message' => 'Bad Request', 'data' => array('validator_messages' => $shortenValidator->messages()))), 400);
+
+		$bigURL = \Input::get('url');
+
+		// User has gone over quota so cant shorten
+		if(\Auth::user()->quota_max != 0 && (\Auth::user()->quota_used + 1) > \Auth::user()->quota_max)
+			return \Response::json(array('error' => array('code' => 'QUOTA-USED', 'http_code' => '400', 'message' => 'Bad Request')), 403);
+
+		$dbLink = \Link::where('destination', '=', $bigURL)->first();
+		if (!isset($dbLink))
+		{
+			$dbLink = new \Link;
+			$dbLink->user_id = \Auth::user()->id;
+			$dbLink->code = $dbLink->generateCode();
+			$dbLink->destination = $bigURL;
+			$dbLink->clicks = "0";
+			$dbLink->save();
+
+			\Auth::user()->quota_used += 1;
+			\Auth::user()->save();
+		}
+
+		$linkCode = $dbLink->code;
+		$linkURL = \Request::root().'/'.$linkCode;
+		return \Response::json(array('ok' => array('code' => 'LINK-SHORTENED', 'http_code' => '200', 'message' => 'OK', 'data' => array('url' => $linkURL, 'url_code' => $linkCode))), 200);
+	}
 
 	/**
 	 * Delete Link
