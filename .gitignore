@@ -47,3 +47,14 @@ crashlytics-build.properties
 
 # Sublime
 *.sublime-workspace
+
+# Laravel
+/bootstrap/compiled.php
+/vendor
+composer.phar
+.env.*.php
+.env.php
+.DS_Store
+Thumbs.db
+/public/assets/css/builds/*.css
+/public/assets/js/builds/*.js
