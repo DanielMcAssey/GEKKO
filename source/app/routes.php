@@ -48,6 +48,17 @@ Route::group(['prefix' => 'manage', 'namespace' => 'GEKKO'], function() {
 		Route::get('login', array('as' => 'login', function() {
 			return View::make('user.login');
 		}));
+
+		if(Config::get("auth.user_registration")) {
+			Route::post( 'register', array(
+				'as' => 'register.post',
+				'uses' => 'UserController@postRegister'
+			) );
+
+			Route::get('register', array('as' => 'register', function() {
+				return View::make('user.register');
+			}));
+		}
 	});
 
 	## Auth Routes

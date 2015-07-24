@@ -121,6 +121,19 @@ class UserController extends \BaseController {
 	}
 
 	/**
+	 * Register a user
+	 *
+	 * @return Response
+	 */
+	public function postRegister()
+	{
+		if(!\Auth::check())
+		{
+			//TODO: Register a user and send email
+		}
+	}
+
+	/**
 	 * Generate a new API Key for current logged in user
 	 *
 	 * @return Response

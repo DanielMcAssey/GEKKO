@@ -16,6 +16,14 @@ return array(
 	'login_page_password'	=> 'Password',
 	'login_page_remember'	=> 'Remember Me',
 	'login_page_login'		=> 'Login',
+	'login_page_register'	=> 'Register',
+
+	'register_page_username'	=> 'Username',
+	'register_page_email'	=> 'Email',
+	'register_page_password'	=> 'Password',
+	'register_page_password_confirm'	=> 'Confirm Password',
+	'register_page_register'		=> 'Register',
+	'register_page_cancel'		=> 'Cancel',
 
 	'confirm_email_no_token'		=> 'No token found in request, make sure the link is correct.',
 	'confirm_email_token_mismatch'		=> 'No matching token found in request, make sure the link is correct.',

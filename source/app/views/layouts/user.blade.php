@@ -29,10 +29,10 @@
 		<link rel="icon" type="image/png" href="{{{ asset('assets/ico/favicon-32x32.png', Config::get("app.use_https")) }}}" sizes="32x32">
 		<link rel="icon" type="image/png" href="{{{ asset('assets/ico/favicon-16x16.png', Config::get("app.use_https")) }}}" sizes="16x16">
 		<link rel="manifest" href="{{{ asset('assets/ico/manifest.json', Config::get("app.use_https")) }}}">
-		<meta name="msapplication-TileColor" content="#53a9dc">
+		<meta name="msapplication-TileColor" content="#4580c2">
 		<meta name="msapplication-TileImage" content="{{{ asset('assets/ico/mstile-144x144.png', Config::get("app.use_https")) }}}">
 		<meta name="msapplication-config" content="{{{ asset('assets/ico/browserconfig.xml', Config::get("app.use_https")) }}}">
-		<meta name="theme-color" content="#53a9dc">
+		<meta name="theme-color" content="#4580c2">
 
 		<link rel="stylesheet" type="text/css" href='https://fonts.googleapis.com/css?family=Lato|IM+Fell+English+SC|Roboto' />
 		<link rel="stylesheet" type="text/css" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">

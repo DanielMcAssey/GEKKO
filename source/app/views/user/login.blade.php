@@ -39,7 +39,12 @@
 				</div>
 				<div class="form-group">
 					<div class="col-sm-12 controls">
+					@if(Config::get("auth.user_registration"))
+						<button type="submit" class="col-sm-5 btn btn-info pull-left">{{{ Lang::get('user.login_page_login') }}}</button>
+						<a href="{{ URL::to('/manage/register/', null, Config::get("app.use_https")) }}" class="col-sm-5 btn btn-success pull-right">{{{ Lang::get('user.login_page_register') }}}</a>
+					@else
 						<button type="submit" class="col-sm-12 btn btn-info btn-full">{{{ Lang::get('user.login_page_login') }}}</button>
+					@endif
 					</div>
 				</div>
 			{{ Form::close() }}
