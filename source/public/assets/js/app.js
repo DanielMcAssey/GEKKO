@@ -26,10 +26,9 @@ function AddLinks(linkArray, lastID) {
 	var newLastID = lastID;
 	for(var i = 0; i < linkArray.length; i++) {
 		var trHTML = '<tr data-rowID="' + linkArray[i].id + '" class="fresh">';
-		trHTML += '<td><img src="/assets/img/mime/' + linkArray[i].mime_icon + '" alt="' + linkArray[i].mime + '" class="mime-icon" height="36" /></td>';
-		trHTML += "<td>" + linkArray[i].name + "</td>";
-		trHTML += "<td>" + linkArray[i].extension + "</td>";
-		trHTML += "<td>" + linkArray[i].date + "</td>";
+		trHTML += "<td>" + linkArray[i].code + "</td>";
+		trHTML += "<td>" + linkArray[i].clicks + "</td>";
+		trHTML += "<td>" + linkArray[i].destination + "</td>";
 		trHTML += '<td><div class="btn-group">';
 		trHTML += '<button type="button" id="link_view" class="btn btn-success btn-sm" data-id="' + linkArray[i].id + '" data-loading-text="<i class=\'fa fa-spinner fa-spin\'></i> Opening"><i class="fa fa-eye"></i>&nbsp;View</button>';
 		trHTML += '<button type="button" id="link_delete" class="btn btn-danger btn-sm" data-id="' + linkArray[i].id + '" data-loading-text="<i class=\'fa fa-spinner fa-spin\'></i> Deleting"><i class="fa fa-times"></i>&nbsp;Delete</button>';

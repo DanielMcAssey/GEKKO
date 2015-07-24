@@ -15,13 +15,11 @@
 
 	$__QUOTA_USED = \Auth::user()->quota_used;
 	$__QUOTA_MAX = \Auth::user()->quota_max;
-	$__QUOTA_USED_MB = number_format(floatval($__QUOTA_USED) / (1000*1000), 1);
-	$__QUOTA_MAX_MB = number_format($__QUOTA_MAX / (1000*1000), 1);
 	$__QUOTA_PERCENTAGE_USED = 0.0;
 	if($__QUOTA_MAX == 0)
 	{
 		$__QUOTA_PERCENTAGE_USED = 0;
-		$__QUOTA_MAX_MB = '&#8734;';
+		$__QUOTA_MAX = '&#8734;';
 	}
 	else
 	{
@@ -34,7 +32,7 @@
 ?>
 	<div class="clearfix">
 		<div class="pull-left">
-			<strong>{{{ Lang::get('site.quota_used') }}} [{{ $__QUOTA_USED_MB }}/{{ $__QUOTA_MAX_MB.' MB' }}]</strong>
+			<strong>{{{ Lang::get('site.quota_used') }}} [{{ number_format($__QUOTA_USED) }}/{{ is_int($__QUOTA_MAX) ? number_format($__QUOTA_MAX) : $__QUOTA_MAX }}]</strong>
 		</div>
 		<div class="pull-right">
 			<strong>{{ number_format($__QUOTA_PERCENTAGE_USED, 2) }}%</strong>
@@ -53,36 +51,34 @@
 	</div>
 </div>
 
-<table id="file_list" class="table table-hover">
+<table id="link_list" class="table table-hover">
 	<thead>
-		<th>Type</th>
-		<th>Name</th>
-		<th>Extension</th>
-		<th>Upload Date</th>
+		<th>Code</th>
+		<th>Clicks</th>
+		<th>Destination</th>
 		<th>Actions</th>
 	</thead>
 	<tbody>
-		<?php $lastUploadID = $lastUploadedFileID; ?>
-		@foreach ($uploadedFiles as $selectedFile)
-		<tr data-rowID="{{{ $selectedFile->id }}}">
-			<td>{{ HTML::image('assets/img/mime/'.$selectedFile->icon(), $selectedFile->mime, array('class' => 'mime-icon', 'height' => '36')) }}</td>
-			<td>{{{ str_replace('.'.$selectedFile->extension, '', $selectedFile->name) }}}</td>
-			<td>{{{ $selectedFile->extension }}}</td>
-			<td>{{{ $selectedFile->created_at }}}</td>
+		<?php $lastLinkID = $lastShortenedLinkID; ?>
+		@foreach ($shortenedLinks as $selectedLink)
+		<tr data-rowID="{{{ $selectedLink->id }}}">
+			<td>{{{ $selectedLink->code }}}</td>
+			<td>{{{ $selectedLink->clicks }}}</td>
+			<td>{{{ $selectedLink->destination }}}</td>
 			<td>
 				<div class="btn-group">
-					<button type="button" id="file_view" class="btn btn-success btn-sm" data-id="{{{ $selectedFile->id }}}" data-loading-text="<i class='fa fa-spinner fa-spin'></i> {{{ Lang::get('site.file_view_loading') }}}"><i class="fa fa-eye"></i>&nbsp;{{{ Lang::get('site.file_view') }}}</button>
-					<button type="button" id="file_delete" class="btn btn-danger btn-sm" data-id="{{{ $selectedFile->id }}}" data-loading-text="<i class='fa fa-spinner fa-spin'></i> {{{ Lang::get('site.file_delete_loading') }}}"><i class="fa fa-times"></i>&nbsp;{{{ Lang::get('site.file_delete') }}}</button>
+					<button type="button" id="link_view" class="btn btn-success btn-sm" data-id="{{{ $selectedLink->id }}}" data-loading-text="<i class='fa fa-spinner fa-spin'></i> {{{ Lang::get('site.link_view_loading') }}}"><i class="fa fa-eye"></i>&nbsp;{{{ Lang::get('site.link_view') }}}</button>
+					<button type="button" id="link_delete" class="btn btn-danger btn-sm" data-id="{{{ $selectedLink->id }}}" data-loading-text="<i class='fa fa-spinner fa-spin'></i> {{{ Lang::get('site.link_delete_loading') }}}"><i class="fa fa-times"></i>&nbsp;{{{ Lang::get('site.link_delete') }}}</button>
 				</div>
 			</td>
 		</tr>
-		<?php if($selectedFile->id > $lastUploadID) { $lastUploadID = $selectedFile->id; } ?>
+		<?php if($selectedLink->id > $lastLinkID) { $lastLinkID = $selectedLink->id; } ?>
 		@endforeach
 	</tbody>
 </table>
-<div id="lastUploadedID" class="hide" data-uploadid="{{{ $lastUploadID }}}"></div>
+<div id="lastLinkID" class="hide" data-uploadid="{{{ $lastLinkID }}}"></div>
 <div class="text-center">
-	{{ $uploadedFiles->links() }}
+	{{ $shortenedLinks->links() }}
 </div>
 
 @stop
