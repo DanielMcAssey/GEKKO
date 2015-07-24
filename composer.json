@@ -1,6 +1,6 @@
 {
-	"name": "danielmcassey/gekkoshortener",
-	"description": "Gekko Shortener is a Laravel ready made package to run your own URL shortener service.",
+	"name": "danielmcassey/gekko",
+	"description": "GEKKO Shortener is a Laravel ready made package to run your own URL shortener service.",
 	"keywords": ["gekko", "shortener", "url"],
 	"license": "MIT",
 	"authors": [
