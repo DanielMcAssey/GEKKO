@@ -37,7 +37,15 @@ Route::group(['prefix' => 'manage', 'namespace' => 'GEKKO'], function() {
 				{
 					if (Auth::check())
 					{
-						return Redirect::route('user.index')->with('flash_notice', Lang::get('user.login_success'));
+						if(Auth::user()->is_activated)
+						{
+							return Redirect::route('user.index')->with('flash_notice', Lang::get('user.login_success'));
+						}
+						else
+						{
+							Auth::logout();
+							return Redirect::route('login')->with('flash_notice', Lang::get('user.not_activated'));
+						}
 					}
 				}
 			}
@@ -51,6 +59,11 @@ Route::group(['prefix' => 'manage', 'namespace' => 'GEKKO'], function() {
 
 		## Register Routes only allowed if user registration is enabled
 		if(Config::get("auth.user_registration")) {
+			Route::get( 'register/confirm/{id}', array(
+				'as' => 'register.confirm',
+				'uses' => 'UserController@getConfirm'
+			) )->where('id', '[a-zA-Z0-9]+');
+
 			Route::post( 'register', array(
 				'as' => 'register.post',
 				'uses' => 'UserController@postRegister'

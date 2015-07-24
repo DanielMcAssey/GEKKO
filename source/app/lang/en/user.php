@@ -11,6 +11,11 @@ return array(
 	'login_success'			=> 'You are successfully logged in.',
 	'login_failure'			=> 'Your username/password combination was incorrect.',
 	'logout_success'		=> 'You are successfully logged out.',
+	'register_success'		=> 'You have successfully registered, you have been sent an activation email, you have to click that link to activate your account.',
+	'register_success_confirm'		=> 'You have successfully activated your account, you can now login.',
+	'register_failure'		=> 'There was a problem registering you on the system.',
+	'register_failure_invalid_code'		=> 'This activation code was not found, make sure the activation link is correct.',
+	'not_activated'			=> 'Your account is not activated, please click the activation email link to activate your account.',
 
 	'login_page_username'	=> 'Username',
 	'login_page_password'	=> 'Password',

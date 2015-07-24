@@ -4,6 +4,7 @@ use Chrisbjr\ApiGuard\Models\ApiKey;
 
 class UserController extends \BaseController {
 
+
 	/**
 	 * Confirm email change
 	 *
@@ -39,6 +40,7 @@ class UserController extends \BaseController {
 
 		return \Redirect::route('user.index')->with('flash_notice', \Lang::get('user.confirm_email_success', array('email' => $new_email)))->withInput();
 	}
+
 
 	/**
 	 * Change the user password
@@ -78,6 +80,7 @@ class UserController extends \BaseController {
 
 		return \Response::json(array('ok' => array('code' => 'PASSWORD-CHANGED', 'http_code' => '200', 'message' => 'OK')), 200);
 	}
+
 
 	/**
 	 * Change the user profile details
@@ -120,18 +123,69 @@ class UserController extends \BaseController {
 		return \Response::json(array('error' => array('code' => 'NOT-AUTH', 'http_code' => '403', 'message' => 'Forbidden')), 403);
 	}
 
+
 	/**
 	 * Register a user
 	 *
-	 * @return Response
+	 * @return Redirect
 	 */
 	public function postRegister()
 	{
-		if(!\Auth::check())
+		if(!\Auth::check()) // Make sure user isnt logged in
 		{
-			//TODO: Register a user and send email
+			$registerValidator = \Validator::make(\Input::all(),
+				array(
+					'username' 				=> 'required|alpha_num|unique:users|between:4,32',
+					'email'					=> 'required|email|unique:users',
+					'password'				=> 'required|min:8',
+					'password_confirm'		=> 'required|same:password'
+				)
+			);
+			if($registerValidator->fails())
+				return \Redirect::route('register')->with('flash_error', $registerValidator->messages())->withInput();
+
+			$userCreationInput = \Input::only(['username', 'email', 'password']);
+			$user = \User::create($userCreationInput);
+			if(!isset($user))
+				return \Redirect::route('register')->with('flash_error', \Lang::get('user.register_failure'));
+
+			if($user->id == 1) // Always make the first user in the system an admin
+				$user->is_admin = true;
+
+			$user->activation_code = $user->generateCode();
+			$user->save();
+
+			\Mail::send('emails.auth.confirmemail', array('username' => $user->username, 'activation_code' => $user->activation_code), function($message) use ($user)
+			{
+				$message->to($user->email, $user->username)->subject(\Lang::get('site.title') . ' - ' . \Lang::get('email.subject_email_confirm'));
+			});
+
+			return \Redirect::route('login')->with('flash_notice', \Lang::get('user.register_success'));
 		}
 	}
+
+
+	/**
+	 * Confirm a user
+	 *
+	 * @return Redirect
+	 */
+	public function getConfirm($id)
+	{
+		if(!\Auth::check()) // Make sure user isnt logged in
+		{
+			$user = \User::where('activation_code', '=', $id)->first();
+			if(!isset($user))
+				return Redirect::route('login')->with('flash_error', Lang::get('user.register_failure_invalid_code'));
+
+			$user->activation_code = '';
+			$user->is_activated = true;
+			$user->save();
+
+			return Redirect::route('login')->with('flash_notice', Lang::get('user.register_success_confirm'));
+		}
+	}
+
 
 	/**
 	 * Generate a new API Key for current logged in user
@@ -151,6 +205,7 @@ class UserController extends \BaseController {
 		return \Response::json(array('error' => array('code' => 'NOT-AUTH', 'http_code' => '403', 'message' => 'Forbidden')), 403);
 	}
 
+
 	/**
 	 * Return API key from current logged in user
 	 *
@@ -166,6 +221,7 @@ class UserController extends \BaseController {
 
 		return \Response::json(array('error' => array('code' => 'NOT-AUTH', 'http_code' => '403', 'message' => 'Forbidden')), 403);
 	}
+
 
 	/**
 	 * Display a listing of the resource.

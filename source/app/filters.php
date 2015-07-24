@@ -46,6 +46,14 @@ Route::filter('auth', function()
 			return Redirect::guest('manage/login');
 		}
 	}
+	else
+	{
+		if(!Auth::user()->is_activated)
+		{
+			Auth::logout();
+			return Redirect::route('login')->with('flash_notice', Lang::get('user.not_activated'));
+		}
+	}
 });
 
 
@@ -64,6 +72,12 @@ Route::filter('auth.admin', function()
 	}
 	else
 	{
+		if(!Auth::user()->is_activated)
+		{
+			Auth::logout();
+			return Redirect::route('login')->with('flash_notice', Lang::get('user.not_activated'));
+		}
+
 		if(!Auth::user()->is_admin)
 		{
 			return Redirect::route('user.index')->with('flash_error', Lang::get('site.unauthorized'));

@@ -20,7 +20,7 @@ class Link extends \Eloquent {
 	}
 
 	/**
-	* Generate random
+	* Generate random url code
 	*
 	* @return string
 	*/

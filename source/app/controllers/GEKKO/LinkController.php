@@ -3,6 +3,7 @@ namespace GEKKO;
 
 class LinkController extends \BaseController {
 
+
 	/**
 	 * Shorten a new URL
 	 *
@@ -46,6 +47,7 @@ class LinkController extends \BaseController {
 		$linkURL = \Request::root().'/'.$linkCode;
 		return \Response::json(array('ok' => array('code' => 'LINK-SHORTENED', 'http_code' => '200', 'message' => 'OK', 'data' => array('url' => $linkURL, 'url_code' => $linkCode))), 200);
 	}
+
 
 	/**
 	 * Delete Link
