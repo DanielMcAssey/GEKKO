@@ -26,7 +26,7 @@ function AddLinks(linkArray, lastID) {
 	var newLastID = lastID;
 	for(var i = 0; i < linkArray.length; i++) {
 		var trHTML = '<tr data-rowID="' + linkArray[i].id + '" class="fresh">';
-		trHTML += "<td>" + linkArray[i].code + "</td>";
+		trHTML += "<td class='link-code'>" + linkArray[i].code + "</td>";
 		trHTML += "<td>" + linkArray[i].clicks + "</td>";
 		trHTML += "<td>" + linkArray[i].destination + "</td>";
 		trHTML += '<td><div class="btn-group">';
@@ -39,7 +39,7 @@ function AddLinks(linkArray, lastID) {
 			newLastID = linkArray[i].id;
 		}
 	}
-	$("div#lastLinkID").data("uploadid", newLastID);
+	$("div#lastLinkID").data("linkid", newLastID);
 }
 
 

@@ -1,5 +1,5 @@
 <?php
-namespace SHAREDUPLOADER\ADMIN;
+namespace GEKKO\ADMIN;
 
 class AdminController extends \BaseController {
 

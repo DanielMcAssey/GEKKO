@@ -62,7 +62,7 @@
 		<?php $lastLinkID = $lastShortenedLinkID; ?>
 		@foreach ($shortenedLinks as $selectedLink)
 		<tr data-rowID="{{{ $selectedLink->id }}}">
-			<td>{{{ $selectedLink->code }}}</td>
+			<td class="link-code">{{{ $selectedLink->code }}}</td>
 			<td>{{{ $selectedLink->clicks }}}</td>
 			<td>{{{ $selectedLink->destination }}}</td>
 			<td>
@@ -76,7 +76,7 @@
 		@endforeach
 	</tbody>
 </table>
-<div id="lastLinkID" class="hide" data-uploadid="{{{ $lastLinkID }}}"></div>
+<div id="lastLinkID" class="hide" data-linkid="{{{ $lastLinkID }}}"></div>
 <div class="text-center">
 	{{ $shortenedLinks->links() }}
 </div>

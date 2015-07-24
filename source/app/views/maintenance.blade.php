@@ -37,7 +37,7 @@
 			<div class="container-fluid">
 				<div id="header">
 					<div id="header-logo" class="col-md-12 col-xs-18">
-						<a href="/" title="ShareUploader Server"><img src="/assets/img/logo.png" class="img-responsive" alt="ShareUploader Server" /></a>
+						<a href="/manage/" title="GEKKO URL Shortener"><img src="/assets/img/logo.png" class="img-responsive" alt="GEKKO URL Shortener" /></a>
 					</div>
 				</div>
 				<div class="col-sm-6 col-sm-offset-3">

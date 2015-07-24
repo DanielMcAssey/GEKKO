@@ -11,8 +11,11 @@ class LinkController extends \BaseController {
 	 */
 	public function postDelete()
 	{
-		if(!(\Auth::check() && \Input::has("linkid")))
+		if(!\Auth::check())
 			return \Response::json(array('error' => array('code' => 'NOT-AUTH', 'http_code' => '403', 'message' => 'Forbidden')), 403);
+
+		if(!\Input::has("linkid"))
+			return \Response::json(array('error' => array('code' => 'MISSING-PARAMETERS', 'http_code' => '400', 'message' => 'Bad Request')), 400);
 
 		$linkID = \Input::get("linkid");
 		$shortenedLink = \Link::find($linkID);
@@ -39,8 +42,11 @@ class LinkController extends \BaseController {
 	 */
 	public function getLatest()
 	{
-		if(!(\Auth::check() && \Input::has("lastid")))
+		if(!\Auth::check())
 			return \Response::json(array('error' => array('code' => 'NOT-AUTH', 'http_code' => '403', 'message' => 'Forbidden')), 403);
+
+		if(!\Input::has("lastid"))
+			return \Response::json(array('error' => array('code' => 'MISSING-PARAMETERS', 'http_code' => '400', 'message' => 'Bad Request')), 400);
 
 		$lastLinkID = \Input::get("lastid");
 		$linkList = \Link::where('user_id', '=', \Auth::user()->id)->where('id', '>', $lastLinkID)->get();
@@ -117,7 +123,13 @@ class LinkController extends \BaseController {
 	 */
 	public function show($id)
 	{
-		//
+		$dbLink = \Link::where('code', '=', $id)->first();
+		if(!isset($dbLink))
+			Response::make("Link not found, please try again!", 404);
+
+		$dbLink->clicks = bcadd($dbLink->clicks, "1");
+		$dbLink->save();
+		return \Redirect::away($dbLink->destination);
 	}
 
 

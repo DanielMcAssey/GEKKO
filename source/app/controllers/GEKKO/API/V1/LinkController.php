@@ -38,18 +38,24 @@ class LinkController extends ApiGuardController {
 		if (filter_var($bigURL, FILTER_VALIDATE_URL) === false)
 			return \Response::json(array('error' => array('code' => 'URL-INVALID', 'http_code' => '400', 'message' => 'Bad Request')), 400);
 
-		$dbLink = new \Link;
-		$dbLink->user_id = $user->id;
-		$dbLink->code = $dbLink->generateCode();
-		$dbLink->destination = $bigURL;
-		$dbLink->save();
+		$dbLink = \Link::where('destination', '=', $bigURL)->first();
+		if (!isset($dbLink))
+		{
+			$dbLink = new \Link;
+			$dbLink->user_id = $user->id;
+			$dbLink->code = $dbLink->generateCode();
+			$dbLink->destination = $bigURL;
+			$dbLink->clicks = "0";
+			$dbLink->save();
 
-		$user->quota_used += 1;
-		$user->save();
+			$user->quota_used += 1;
+			$user->save();
+		}
 
-		$linkURL = \Request::root().'/'.$dbLink->code;
+		$linkCode = $dbLink->code;
+		$linkURL = \Request::root().'/'.$linkCode;
 
-		return \Response::json(array('ok' => array('code' => 'LINK-SHORTENED', 'http_code' => '200', 'message' => 'OK', 'data' => array('url' => $linkURL, 'code' => $dbLink->code))), 200);
+		return \Response::json(array('ok' => array('code' => 'LINK-SHORTENED', 'http_code' => '200', 'message' => 'OK', 'data' => array('url' => $linkURL, 'code' => $linkCode))), 200);
 	}
 
 }

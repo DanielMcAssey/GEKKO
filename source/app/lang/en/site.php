@@ -61,6 +61,12 @@ return array(
 	'modal_title_change_pw' => 'Change Password',
 	'modal_title_profile' => 'Edit Profile',
 
+	## Modal: Shorten URL
+	'modal_shorten_url' => 'Big URL',
+	'modal_shorten_result' => 'Shortened URL',
+	'modal_shorten_submit' => 'Shorten URL',
+	'modal_shorten_submit_loading' => 'Shortening',
+
 	## Modal: API Key
 	'modal_api_key_hidden' => 'API key is hidden for safety',
 	'modal_api_key_show_key' => 'Show API Key',

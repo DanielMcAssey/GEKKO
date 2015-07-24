@@ -68,4 +68,15 @@ return array(
 
 	),
 
+	/*
+	|--------------------------------------------------------------------------
+	| Allow User Registration
+	|--------------------------------------------------------------------------
+	|
+	| Allows guests to register for accounts
+	|
+	*/
+
+	'user_registration' => false,
+
 );

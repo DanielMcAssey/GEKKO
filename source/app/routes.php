@@ -99,6 +99,7 @@ Route::group(['prefix' => 'manage', 'namespace' => 'GEKKO'], function() {
 			'uses' => 'LinkController@index'
 		) );
 	});
+
 });
 
 ## Admin Routes
@@ -109,7 +110,12 @@ Route::group(['prefix' => 'admin', 'namespace' => 'GEKKO\ADMIN', 'before' => 'au
 	) );
 });
 
+Route::get( '/{id}', array(
+	'as' => 'index.show',
+	'uses' => 'GEKKO\LinkController@show'
+) )->where('id', '[a-zA-Z0-9]+');
 
+## Default Route
 Route::get('/', function() {
 	return View::make('index');
 });
