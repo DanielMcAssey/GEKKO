@@ -11,7 +11,7 @@
 <div class="col-md-4 col-md-offset-4 col-sm-8 col-sm-offset-2">
 	<div class="panel panel-info" >
 		<div class="panel-body" >
-			{{ Form::open(array('route' => 'login',  'method' => 'POST', 'class' => 'form-horizontal', 'role' => 'form')) }}
+			{{ Form::open(array('url' => url('manage/login/', null, Config::get("app.use_https")),  'method' => 'POST', 'class' => 'form-horizontal', 'role' => 'form')) }}
 				<div class="form-group">
 					<div class="col-sm-12">
 						<div class="input-group">
