@@ -1,0 +1,88 @@
+@extends('layouts.user')
+{{-- Web site Title --}}
+@section('title')
+{{{ Lang::get('site.title_index') }}} - {{{ Lang::get('site.title') }}}
+@parent
+@stop
+
+{{-- Content --}}
+@section('content')
+
+<div class="col-md-12">
+<?php
+	$__QUOTA_WARN_LEVEL = 65;
+	$__QUOTA_DANGER_LEVEL = 90;
+
+	$__QUOTA_USED = \Auth::user()->quota_used;
+	$__QUOTA_MAX = \Auth::user()->quota_max;
+	$__QUOTA_USED_MB = number_format(floatval($__QUOTA_USED) / (1000*1000), 1);
+	$__QUOTA_MAX_MB = number_format($__QUOTA_MAX / (1000*1000), 1);
+	$__QUOTA_PERCENTAGE_USED = 0.0;
+	if($__QUOTA_MAX == 0)
+	{
+		$__QUOTA_PERCENTAGE_USED = 0;
+		$__QUOTA_MAX_MB = '&#8734;';
+	}
+	else
+	{
+		$__QUOTA_PERCENTAGE_USED = ($__QUOTA_USED / $__QUOTA_MAX) * 100;
+	}
+	$__QUOTA_BAR_WIDTH_0 = ($__QUOTA_PERCENTAGE_USED >= $__QUOTA_WARN_LEVEL ? $__QUOTA_WARN_LEVEL : $__QUOTA_PERCENTAGE_USED);
+	$__QUOTA_BAR_WIDTH_1 = ($__QUOTA_PERCENTAGE_USED <= $__QUOTA_WARN_LEVEL ? 0 : ($__QUOTA_PERCENTAGE_USED >= $__QUOTA_DANGER_LEVEL ? ($__QUOTA_DANGER_LEVEL - $__QUOTA_WARN_LEVEL) : $__QUOTA_PERCENTAGE_USED - $__QUOTA_WARN_LEVEL));
+	$__QUOTA_BAR_WIDTH_2 = ($__QUOTA_PERCENTAGE_USED <= $__QUOTA_DANGER_LEVEL ? 0 : $__QUOTA_PERCENTAGE_USED - $__QUOTA_DANGER_LEVEL);
+
+?>
+	<div class="clearfix">
+		<div class="pull-left">
+			<strong>{{{ Lang::get('site.quota_used') }}} [{{ $__QUOTA_USED_MB }}/{{ $__QUOTA_MAX_MB.' MB' }}]</strong>
+		</div>
+		<div class="pull-right">
+			<strong>{{ number_format($__QUOTA_PERCENTAGE_USED, 2) }}%</strong>
+		</div>
+	</div>
+	<div class="progress">
+		<div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="{{ $__QUOTA_BAR_WIDTH_0 }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ $__QUOTA_BAR_WIDTH_0 }}%">
+			<span class="sr-only">{{ $__QUOTA_BAR_WIDTH_0 }}% {{{ Lang::get('site.quota_used_short') }}}</span>
+		</div>
+		<div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="{{ $__QUOTA_BAR_WIDTH_1 }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ $__QUOTA_BAR_WIDTH_1 }}%">
+			<span class="sr-only">{{ $__QUOTA_BAR_WIDTH_1 }}% {{{ Lang::get('site.quota_used_short') }}} [{{{ Lang::get('site.gen_notice_caps') }}}]</span>
+		</div>
+		<div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="{{ $__QUOTA_BAR_WIDTH_2 }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ $__QUOTA_BAR_WIDTH_2 }}%">
+			<span class="sr-only">{{ $__QUOTA_BAR_WIDTH_2 }}% {{{ Lang::get('site.quota_used_short') }}} [{{{ Lang::get('site.gen_warn_caps') }}}]</span>
+		</div>
+	</div>
+</div>
+
+<table id="file_list" class="table table-hover">
+	<thead>
+		<th>Type</th>
+		<th>Name</th>
+		<th>Extension</th>
+		<th>Upload Date</th>
+		<th>Actions</th>
+	</thead>
+	<tbody>
+		<?php $lastUploadID = $lastUploadedFileID; ?>
+		@foreach ($uploadedFiles as $selectedFile)
+		<tr data-rowID="{{{ $selectedFile->id }}}">
+			<td>{{ HTML::image('assets/img/mime/'.$selectedFile->icon(), $selectedFile->mime, array('class' => 'mime-icon', 'height' => '36')) }}</td>
+			<td>{{{ str_replace('.'.$selectedFile->extension, '', $selectedFile->name) }}}</td>
+			<td>{{{ $selectedFile->extension }}}</td>
+			<td>{{{ $selectedFile->created_at }}}</td>
+			<td>
+				<div class="btn-group">
+					<button type="button" id="file_view" class="btn btn-success btn-sm" data-id="{{{ $selectedFile->id }}}" data-loading-text="<i class='fa fa-spinner fa-spin'></i> {{{ Lang::get('site.file_view_loading') }}}"><i class="fa fa-eye"></i>&nbsp;{{{ Lang::get('site.file_view') }}}</button>
+					<button type="button" id="file_delete" class="btn btn-danger btn-sm" data-id="{{{ $selectedFile->id }}}" data-loading-text="<i class='fa fa-spinner fa-spin'></i> {{{ Lang::get('site.file_delete_loading') }}}"><i class="fa fa-times"></i>&nbsp;{{{ Lang::get('site.file_delete') }}}</button>
+				</div>
+			</td>
+		</tr>
+		<?php if($selectedFile->id > $lastUploadID) { $lastUploadID = $selectedFile->id; } ?>
+		@endforeach
+	</tbody>
+</table>
+<div id="lastUploadedID" class="hide" data-uploadid="{{{ $lastUploadID }}}"></div>
+<div class="text-center">
+	{{ $uploadedFiles->links() }}
+</div>
+
+@stop

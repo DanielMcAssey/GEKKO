@@ -43,7 +43,30 @@ Route::filter('auth', function()
 		}
 		else
 		{
-			return Redirect::guest('login');
+			return Redirect::guest('manage/login');
+		}
+	}
+});
+
+
+Route::filter('auth.admin', function()
+{
+	if (Auth::guest())
+	{
+		if (Request::ajax())
+		{
+			return Response::make('Unauthorized', 401);
+		}
+		else
+		{
+			return Redirect::guest('manage/login');
+		}
+	}
+	else
+	{
+		if(!Auth::user()->is_admin)
+		{
+			return Redirect::route('user.index')->with('flash_error', Lang::get('site.unauthorized'));
 		}
 	}
 });
