@@ -61,8 +61,8 @@
 	<tbody>
 		<?php $lastLinkID = $lastShortenedLinkID; ?>
 		@foreach ($shortenedLinks as $selectedLink)
-		<tr data-rowID="{{{ $selectedLink->id }}}">
-			<td class="link-code">{{{ $selectedLink->code }}}</td>
+		<tr data-rowID="{{{ $selectedLink->id }}}" data-linkCode="{{{ $selectedLink->code }}}">
+			<td>{{{ $selectedLink->code }}}</td>
 			<td>{{{ $selectedLink->clicks }}}</td>
 			<td>{{{ $selectedLink->destination }}}</td>
 			<td>

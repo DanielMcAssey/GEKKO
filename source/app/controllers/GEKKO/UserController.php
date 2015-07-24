@@ -52,7 +52,7 @@ class UserController extends \BaseController {
 
 		$passwordValidator = \Validator::make(\Input::all(),
 			array(
-				'old_password' 		=> 'required',
+				'old_password' 			=> 'required',
 				'new_password'			=> 'required|min:8',
 				'new_password_confirm'	=> 'required|same:new_password'
 			)

@@ -25,8 +25,8 @@
 function AddLinks(linkArray, lastID) {
 	var newLastID = lastID;
 	for(var i = 0; i < linkArray.length; i++) {
-		var trHTML = '<tr data-rowID="' + linkArray[i].id + '" class="fresh">';
-		trHTML += "<td class='link-code'>" + linkArray[i].code + "</td>";
+		var trHTML = '<tr data-rowID="' + linkArray[i].id + '" data-linkCode="' + linkArray[i].code + '" class="fresh">';
+		trHTML += "<td>" + linkArray[i].code + "</td>";
 		trHTML += "<td>" + linkArray[i].clicks + "</td>";
 		trHTML += "<td>" + linkArray[i].destination + "</td>";
 		trHTML += '<td><div class="btn-group">';
@@ -89,13 +89,13 @@ function ChangePassword(e) {
 		type: "POST",
 		cache: false,
 		url : "/manage/ajax/user/changePassword",
-		data : { old_password: password_old, password: password_new, password_confirm: password_new_confirm},
+		data : { old_password: password_old, new_password: password_new, new_password_confirm: password_new_confirm},
 		success: function(result) {
 			if(typeof result.ok !== 'undefined') {
 				$('form#form_change_pw input[name=old_password]').val("");
 				$('form#form_change_pw input[name=new_password]').val("");
 				$('form#form_change_pw input[name=new_password_confirm]').val("");
-				window.location.href = "/logout/";
+				window.location.href = "/manage/logout/";
 			}
 		}
 	}).fail(function(result) {
@@ -164,10 +164,18 @@ function EditProfile(e) {
 
 
 function Click_View(e) {
-	var linkID = $(e).data("id");
 	RemoveOldActiveViewLink();
 	$(e).button('loading');
-	//TODO: Open Link
+	var linkID = $(e).data("id");
+	var urlCode = $('tr[data-rowID="' + linkID + '"]').data("linkcode");
+	var urlProtocol = "http://"
+	if(window.location.protocol == 'https:')
+		urlProtocol = "https://"
+
+	var urlDestination = urlProtocol + window.location.hostname + "/" + urlCode;
+	var redirectWindow = window.open(urlDestination, '_blank');
+    redirectWindow.location;
+
 	$('tr[data-rowID="' + linkID + '"]').addClass("link-viewed");
 	$(e).button('reset');
 }
