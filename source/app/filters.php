@@ -13,10 +13,7 @@
 
 App::before(function($request)
 {
-	if( ! Request::secure() && Config::get("app.use_https"))
-	{
-		return Redirect::secure(Request::path());
-	}
+	//
 });
 
 

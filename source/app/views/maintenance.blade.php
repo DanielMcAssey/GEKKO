@@ -76,6 +76,6 @@
 		<script tpye="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 		<script tpye="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
 		<script tpye="text/javascript">(function($,d){$.each(readyQ,function(i,f){$(f)});$.each(bindReadyQ,function(i,f){$(d).bind("ready",f)})})(jQuery,document)</script>
-		<script tpye="text/javascript" src="{{asset('bootstrap/js/bootstrap.min.js')}}"></script>
+		<script tpye="text/javascript" src="{{asset('bootstrap/js/bootstrap.min.js', Config::get("app.use_https"))}}"></script>
 	</body>
 </html>
