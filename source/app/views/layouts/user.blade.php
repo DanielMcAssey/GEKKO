@@ -14,31 +14,31 @@
 		<meta name="Rating" content="General" />
 		<meta name="description" content="GEKKO URL Shortener" />
 
-		<link rel="apple-touch-icon" sizes="180x180" href="{{{ asset('assets/ico/apple-touch-icon-180x180.png') }}}" />
-		<link rel="apple-touch-icon" sizes="152x152" href="{{{ asset('assets/ico/apple-touch-icon-152x152.png') }}}" />
-		<link rel="apple-touch-icon" sizes="144x144" href="{{{ asset('assets/ico/apple-touch-icon-144x144.png') }}}" />
-		<link rel="apple-touch-icon" sizes="120x120" href="{{{ asset('assets/ico/apple-touch-icon-120x120.png') }}}" />
-		<link rel="apple-touch-icon" sizes="114x114" href="{{{ asset('assets/ico/apple-touch-icon-114x114.png') }}}" />
-		<link rel="apple-touch-icon" sizes="76x76" href="{{{ asset('assets/ico/apple-touch-icon-76x76.png') }}}" />
-		<link rel="apple-touch-icon" sizes="72x72" href="{{{ asset('assets/ico/apple-touch-icon-72x72.png') }}}" />
-		<link rel="apple-touch-icon" sizes="60x60" href="{{{ asset('assets/ico/apple-touch-icon-60x60.png') }}}">
-		<link rel="apple-touch-icon" sizes="57x57" href="{{{ asset('assets/ico/apple-touch-icon-57x57.png') }}}" />
-		<link rel="icon" type="image/png" href="{{{ asset('assets/ico/favicon-194x194.png') }}}" sizes="194x194">
-		<link rel="icon" type="image/png" href="{{{ asset('assets/ico/android-chrome-192x192.png') }}}" sizes="192x192">
-		<link rel="icon" type="image/png" href="{{{ asset('assets/ico/favicon-96x96.png') }}}" sizes="96x96">
-		<link rel="icon" type="image/png" href="{{{ asset('assets/ico/favicon-32x32.png') }}}" sizes="32x32">
-		<link rel="icon" type="image/png" href="{{{ asset('assets/ico/favicon-16x16.png') }}}" sizes="16x16">
-		<link rel="manifest" href="{{{ asset('assets/ico/manifest.json') }}}">
+		<link rel="apple-touch-icon" sizes="180x180" href="{{{ asset('assets/ico/apple-touch-icon-180x180.png', Config::get("app.use_https")) }}}" />
+		<link rel="apple-touch-icon" sizes="152x152" href="{{{ asset('assets/ico/apple-touch-icon-152x152.png', Config::get("app.use_https")) }}}" />
+		<link rel="apple-touch-icon" sizes="144x144" href="{{{ asset('assets/ico/apple-touch-icon-144x144.png', Config::get("app.use_https")) }}}" />
+		<link rel="apple-touch-icon" sizes="120x120" href="{{{ asset('assets/ico/apple-touch-icon-120x120.png', Config::get("app.use_https")) }}}" />
+		<link rel="apple-touch-icon" sizes="114x114" href="{{{ asset('assets/ico/apple-touch-icon-114x114.png', Config::get("app.use_https")) }}}" />
+		<link rel="apple-touch-icon" sizes="76x76" href="{{{ asset('assets/ico/apple-touch-icon-76x76.png', Config::get("app.use_https")) }}}" />
+		<link rel="apple-touch-icon" sizes="72x72" href="{{{ asset('assets/ico/apple-touch-icon-72x72.png', Config::get("app.use_https")) }}}" />
+		<link rel="apple-touch-icon" sizes="60x60" href="{{{ asset('assets/ico/apple-touch-icon-60x60.png', Config::get("app.use_https")) }}}">
+		<link rel="apple-touch-icon" sizes="57x57" href="{{{ asset('assets/ico/apple-touch-icon-57x57.png', Config::get("app.use_https")) }}}" />
+		<link rel="icon" type="image/png" href="{{{ asset('assets/ico/favicon-194x194.png', Config::get("app.use_https")) }}}" sizes="194x194">
+		<link rel="icon" type="image/png" href="{{{ asset('assets/ico/android-chrome-192x192.png', Config::get("app.use_https")) }}}" sizes="192x192">
+		<link rel="icon" type="image/png" href="{{{ asset('assets/ico/favicon-96x96.png', Config::get("app.use_https")) }}}" sizes="96x96">
+		<link rel="icon" type="image/png" href="{{{ asset('assets/ico/favicon-32x32.png', Config::get("app.use_https")) }}}" sizes="32x32">
+		<link rel="icon" type="image/png" href="{{{ asset('assets/ico/favicon-16x16.png', Config::get("app.use_https")) }}}" sizes="16x16">
+		<link rel="manifest" href="{{{ asset('assets/ico/manifest.json', Config::get("app.use_https")) }}}">
 		<meta name="msapplication-TileColor" content="#53a9dc">
-		<meta name="msapplication-TileImage" content="{{{ asset('assets/ico/mstile-144x144.png') }}}">
-		<meta name="msapplication-config" content="{{{ asset('assets/ico/browserconfig.xml') }}}">
+		<meta name="msapplication-TileImage" content="{{{ asset('assets/ico/mstile-144x144.png', Config::get("app.use_https")) }}}">
+		<meta name="msapplication-config" content="{{{ asset('assets/ico/browserconfig.xml', Config::get("app.use_https")) }}}">
 		<meta name="theme-color" content="#53a9dc">
 
-		<link rel="stylesheet" type="text/css" href='http://fonts.googleapis.com/css?family=Lato|IM+Fell+English+SC|Roboto' />
+		<link rel="stylesheet" type="text/css" href='https://fonts.googleapis.com/css?family=Lato|IM+Fell+English+SC|Roboto' />
 		<link rel="stylesheet" type="text/css" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
 
-		<link rel="stylesheet" type="text/css" href="{{asset('/bootstrap/css/bootstrap.min.css')}}" />
-		<link rel="stylesheet" type="text/css" href="{{asset('/assets/css/font-awesome.min.css')}}" />
+		<link rel="stylesheet" type="text/css" href="{{ asset('/bootstrap/css/bootstrap.min.css', Config::get("app.use_https")) }}" />
+		<link rel="stylesheet" type="text/css" href="{{ asset('/assets/css/font-awesome.min.css', Config::get("app.use_https")) }}" />
 
 		{{ Minify::stylesheet(array('/assets/css/start.css', '/assets/css/app.css')) }}
 @if(Auth::check())
@@ -154,7 +154,7 @@
 		<script tpye="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 		<script tpye="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
 		<script tpye="text/javascript">(function($,d){$.each(readyQ,function(i,f){$(f)});$.each(bindReadyQ,function(i,f){$(d).bind("ready",f)})})(jQuery,document)</script>
-		<script tpye="text/javascript" src="{{asset('bootstrap/js/bootstrap.min.js')}}"></script>
+		<script tpye="text/javascript" src="{{ asset('bootstrap/js/bootstrap.min.js', Config::get("app.use_https")) }}"></script>
 @if(Auth::check())
 		{{ Minify::javascript('/assets/js/app.js') }}
 	@if(Auth::user()->is_admin)
