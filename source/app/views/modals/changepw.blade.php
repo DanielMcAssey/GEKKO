@@ -6,7 +6,7 @@
 				<button type="button" class="close" data-dismiss="modal">&times;</button>
 				<h4 class="modal-title"><i class="fa fa-unlock-alt"></i>&nbsp;{{{ Lang::get('site.modal_title_change_pw') }}}</h4>
 			</div>
-			{{ Form::open(array('url' => url('ajax/user/changePassword'), 'method' => 'POST', 'class' => 'form-horizontal', 'id' => 'form_change_pw', 'role' => 'form')) }}
+			{{ Form::open(array('url' => url('ajax/user/changePassword', null, Config::get("app.use_https")), 'method' => 'POST', 'class' => 'form-horizontal', 'id' => 'form_change_pw', 'role' => 'form')) }}
 			<div class="modal-body">
 				<div id="error_box" class="alert-message alert-message-danger bs-hidden">
 					<h4><i class="fa fa-info-circle"></i>&nbsp;<strong>{{{ Lang::get('site.gen_error_caps') }}}</strong></h4>

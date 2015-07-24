@@ -74,7 +74,7 @@
 				<div id="header">
 					<div id="header-logo" class="col-md-12 col-xs-18">
 						<?php
-							$header_img = HTML::image('/assets/img/logo.png', Lang::get('site.title'), array('class' => 'img-responsive'));
+							$header_img = HTML::image('/assets/img/logo.png', Lang::get('site.title'), array('class' => 'img-responsive'), Config::get("app.use_https"));
 						?>
 						<a href="{{ URL::to('/manage/') }}" title="{{ Lang::get('site.title') }}" >{{ $header_img }}</a>
 					</div>
