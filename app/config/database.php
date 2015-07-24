@@ -26,7 +26,7 @@ return array(
 	|
 	*/
 
-	'default' => ($_ENV['DB_DRIVER'] ?: 'mysql'),
+	'default' => appEnv('DB_DRIVER', 'mysql'),
 
 	/*
 	|--------------------------------------------------------------------------
@@ -49,38 +49,38 @@ return array(
 		'sqlite' => array(
 			'driver'   => 'sqlite',
 			'database' => __DIR__.'/../database/production.sqlite',
-			'prefix'   => ($_ENV['DB_PREFIX'] ?: ''),
+			'prefix'   => appEnv('DB_PREFIX', ''),
 		),
 
 		'mysql' => array(
 			'driver'    => 'mysql',
-			'host'      => ($_ENV['DB_HOST'] ?: 'localhost'),
-			'database'  => ($_ENV['DB_NAME'] ?: 'forge'),
-			'username'  => ($_ENV['DB_USERNAME'] ?: 'forge'),
-			'password'  => ($_ENV['DB_PASSWORD'] ?: ''),
+			'host'      => appEnv('DB_HOST', 'localhost'),
+			'database'  => appEnv('DB_NAME', 'forge'),
+			'username'  => appEnv('DB_USERNAME', 'forge'),
+			'password'  => appEnv('DB_PASSWORD', ''),
 			'charset'   => 'utf8',
 			'collation' => 'utf8_unicode_ci',
-			'prefix'    => ($_ENV['DB_PREFIX'] ?: ''),
+			'prefix'    => appEnv('DB_PREFIX', ''),
 		),
 
 		'pgsql' => array(
 			'driver'   => 'pgsql',
-			'host'      => ($_ENV['DB_HOST'] ?: 'localhost'),
-			'database'  => ($_ENV['DB_NAME'] ?: 'forge'),
-			'username'  => ($_ENV['DB_USERNAME'] ?: 'forge'),
-			'password'  => ($_ENV['DB_PASSWORD'] ?: ''),
+			'host'      => appEnv('DB_HOST', 'localhost'),
+			'database'  => appEnv('DB_NAME', 'forge'),
+			'username'  => appEnv('DB_USERNAME', 'forge'),
+			'password'  => appEnv('DB_PASSWORD', ''),
 			'charset'  => 'utf8',
-			'prefix'    => ($_ENV['DB_PREFIX'] ?: ''),
+			'prefix'    => appEnv('DB_PREFIX', ''),
 			'schema'   => 'public',
 		),
 
 		'sqlsrv' => array(
 			'driver'   => 'sqlsrv',
-			'host'      => ($_ENV['DB_HOST'] ?: 'localhost'),
-			'database'  => ($_ENV['DB_NAME'] ?: 'forge'),
-			'username'  => ($_ENV['DB_USERNAME'] ?: 'forge'),
-			'password'  => ($_ENV['DB_PASSWORD'] ?: ''),
-			'prefix'    => ($_ENV['DB_PREFIX'] ?: ''),
+			'host'      => appEnv('DB_HOST', 'localhost'),
+			'database'  => appEnv('DB_NAME', 'forge'),
+			'username'  => appEnv('DB_USERNAME', 'forge'),
+			'password'  => appEnv('DB_PASSWORD', ''),
+			'prefix'    => appEnv('DB_PREFIX', ''),
 		),
 
 	),

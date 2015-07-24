@@ -101,7 +101,7 @@ return array(
 	|
 	*/
 
-	'key' => ($_ENV['ENCRYPTION_KEY'] ?: 'replacethisstring'),
+	'key' => appEnv('ENCRYPTION_KEY', 'ReplaceThisString'),
 
 	'cipher' => MCRYPT_RIJNDAEL_128,
 
