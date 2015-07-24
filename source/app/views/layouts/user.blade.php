@@ -71,6 +71,14 @@
 	<body>
 		<div id="content">
 			<div class="container-fluid">
+				<div id="header">
+					<div id="header-logo" class="col-md-12 col-xs-18">
+						<?php
+							$header_img = HTML::image('/assets/img/logo.png', Lang::get('site.title'), array('class' => 'img-responsive'));
+						?>
+						<a href="{{ URL::to('/') }}" title="{{ Lang::get('site.title') }}" >{{ $header_img }}</a>
+					</div>
+				</div>
 				<noscript>
 					<div class="col-md-12 col-xs-18">
 						<div class="alert alert-danger text-center" role="alert">
