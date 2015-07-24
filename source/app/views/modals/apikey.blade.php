@@ -7,10 +7,9 @@
 				<h4 class="modal-title"><i class="fa fa-key"></i>&nbsp;{{{ Lang::get('site.modal_title_api_key') }}}</h4>
 			</div>
 			<div class="modal-body">
-				<div class="alert alert-warning alert-block">
-					<button type="button" class="close" data-dismiss="alert">&times;</button>
-					<h4>{{{ Lang::get('site.gen_warn_caps') }}}</h4>
-					{{{ Lang::get('site.modal_api_key_warning') }}}
+				<div class="alert-message alert-message-warning">
+					<h4><i class="fa fa-exclamation-triangle"></i>&nbsp;<strong>{{{ Lang::get('site.gen_warn_caps') }}}</strong></h4>
+					<p>{{{ Lang::get('site.modal_api_key_warning') }}}</p>
 				</div>
 				<div id="api_key_area">
 					<div class="input-group">

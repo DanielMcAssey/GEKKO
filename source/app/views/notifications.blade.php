@@ -29,7 +29,7 @@
 @if ($message = Session::get('flash_warning'))
 <div class="alert alert-warning alert-block">
 	<button type="button" class="close" data-dismiss="alert">&times;</button>
-	<h4><i class="fa fa-info-circle"></i>&nbsp;<strong>{{{ Lang::get('site.gen_warn_caps') }}}</strong></h4>
+	<h4><i class="fa fa-exclamation-triangle"></i>&nbsp;<strong>{{{ Lang::get('site.gen_warn_caps') }}}</strong></h4>
 	@if(is_array($message))
 		@foreach ($message as $m)
 			{{ $m }}
