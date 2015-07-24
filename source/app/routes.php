@@ -44,7 +44,7 @@ Route::group(['prefix' => 'manage', 'namespace' => 'GEKKO'], function() {
 						else
 						{
 							Auth::logout();
-							return Redirect::route('login')->with('flash_notice', Lang::get('user.not_activated'));
+							return Redirect::route('login')->with('flash_error', Lang::get('user.not_activated'));
 						}
 					}
 				}

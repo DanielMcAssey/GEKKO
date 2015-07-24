@@ -51,7 +51,7 @@ Route::filter('auth', function()
 		if(!Auth::user()->is_activated)
 		{
 			Auth::logout();
-			return Redirect::route('login')->with('flash_notice', Lang::get('user.not_activated'));
+			return Redirect::route('login')->with('flash_error', Lang::get('user.not_activated'));
 		}
 	}
 });
@@ -75,7 +75,7 @@ Route::filter('auth.admin', function()
 		if(!Auth::user()->is_activated)
 		{
 			Auth::logout();
-			return Redirect::route('login')->with('flash_notice', Lang::get('user.not_activated'));
+			return Redirect::route('login')->with('flash_error', Lang::get('user.not_activated'));
 		}
 
 		if(!Auth::user()->is_admin)
