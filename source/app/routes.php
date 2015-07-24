@@ -49,6 +49,7 @@ Route::group(['prefix' => 'manage', 'namespace' => 'GEKKO'], function() {
 			return View::make('user.login');
 		}));
 
+		## Register Routes only allowed if user registration is enabled
 		if(Config::get("auth.user_registration")) {
 			Route::post( 'register', array(
 				'as' => 'register.post',
