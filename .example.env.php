@@ -5,6 +5,8 @@ return array(
 	// General Config
 	'ENCRYPTION_KEY'			=> 'REPLACE_THIS_KEY', // Random 32 character string
 	'ENABLE_REGISTRATION'		=> true, // Enable user registration
+	'WEBSITE_URL'				=> 'http://localhost'
+	'USE_HTTPS'					=> false, // Requires a valid SSL cert to function
 
 	// Database Config
 	'DB_DRIVER'					=> 'mysql', // sqlite, mysql, pgsql, sqlsrv

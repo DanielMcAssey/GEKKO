@@ -38,7 +38,7 @@ return array(
 	|
 	*/
 
-	'url' => 'http://localhost',
+	'url' => appEnv('WEBSITE_URL', 'http://localhost'),
 
 	/*
 	|--------------------------------------------------------------------------
@@ -49,7 +49,7 @@ return array(
 	|
 	*/
 
-	'use_https' => false,
+	'use_https' => (appEnv('USE_HTTPS', false) === 'true'),
 
 	/*
 	|--------------------------------------------------------------------------
