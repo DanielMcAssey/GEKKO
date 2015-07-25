@@ -53,10 +53,10 @@
 
 <table id="link_list" class="table table-hover">
 	<thead>
-		<th>Code</th>
-		<th>Clicks</th>
-		<th>Destination</th>
-		<th>Actions</th>
+		<th>{{{ Lang::get('site.link_th_code') }}}</th>
+		<th>{{{ Lang::get('site.link_th_clicks') }}}</th>
+		<th>{{{ Lang::get('site.link_th_dest') }}}</th>
+		<th>{{{ Lang::get('site.link_th_actions') }}}</th>
 	</thead>
 	<tbody>
 		<?php $lastLinkID = $lastShortenedLinkID; ?>

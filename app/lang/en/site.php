@@ -48,6 +48,12 @@ return array(
 	'quota_used' => 'Links Shortened',
 	'quota_used_short' => 'Used',
 
+	## Links Table Header
+	'link_th_code' => 'Code',
+	'link_th_clicks' => 'Clicks',
+	'link_th_dest' => 'Destination',
+	'link_th_actions' => 'Actions',
+
 	## Link Options
 	'link_view' => 'View',
 	'link_view_loading' => 'Opening',
