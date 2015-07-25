@@ -149,16 +149,23 @@ class UserController extends \BaseController {
 			if(!isset($user))
 				return \Redirect::route('register')->with('flash_error', \Lang::get('user.register_failure'));
 
-			if($user->id == 1) // Always make the first user in the system an admin
-				$user->is_admin = true;
-
-			$user->activation_code = $user->generateCode();
-			$user->save();
-
-			\Mail::send('emails.auth.confirmemail', array('username' => $user->username, 'activation_code' => $user->activation_code), function($message) use ($user)
+			if($user->id == 1) // First user = Admin
 			{
-				$message->to($user->email, $user->username)->subject(\Lang::get('site.title') . ' - ' . \Lang::get('email.subject_email_confirm'));
-			});
+				$user->is_admin = true; // Make Admin
+				$user->quota_max = 0; // Infinity max urls
+				$user->is_activated = true; // Make Admin user automatically activated
+			}
+			else
+			{
+				$user->activation_code = $user->generateCode();
+
+				\Mail::send('emails.auth.confirmemail', array('username' => $user->username, 'activation_code' => $user->activation_code), function($message) use ($user)
+				{
+					$message->to($user->email, $user->username)->subject(\Lang::get('site.title') . ' - ' . \Lang::get('email.subject_email_confirm'));
+				});
+			}
+
+			$user->save();
 
 			return \Redirect::route('login')->with('flash_notice', \Lang::get('user.register_success'));
 		}
