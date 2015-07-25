@@ -73,6 +73,11 @@ Route::group(['prefix' => 'manage', 'namespace' => 'GEKKO'], function() {
 				return View::make('user.register');
 			}));
 		}
+
+		## Default route for guests is login
+		Route::get('/', array('as' => 'login.index', function() {
+			return Redirect::route('login');
+		}));
 	});
 
 	## Auth Routes
