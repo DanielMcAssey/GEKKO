@@ -69,7 +69,7 @@ class UserController extends \BaseController {
 		if(!\Hash::check($current_password, \Auth::user()->getAuthPassword()))
 			return \Response::json(array('error' => array('code' => 'MISMATCH-PASSWORD', 'http_code' => '400', 'message' => 'Bad Request')), 400);
 
-		\Auth::user()->password = \Hash::make($new_password);
+		\Auth::user()->password = $new_password;
 		if(!\Auth::user()->save())
 			return \Response::json(array('error' => array('code' => 'GENERIC-ERROR', 'http_code' => '500', 'message' => 'Internal Server Error')), 400);
 
