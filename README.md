@@ -2,6 +2,7 @@
 
 ## GEKKO URL Shortener
 
+[![Build Status](https://travis-ci.org/DanielMcAssey/GEKKO.svg?branch=develop)](https://travis-ci.org/DanielMcAssey/GEKKO)
 [![Latest Stable Version](https://poser.pugx.org/danielmcassey/gekko/v/stable)](https://packagist.org/packages/danielmcassey/gekko)
 [![Total Downloads](https://poser.pugx.org/danielmcassey/gekko/downloads)](https://packagist.org/packages/danielmcassey/gekko)
 [![Latest Unstable Version](https://poser.pugx.org/danielmcassey/gekko/v/unstable)](https://packagist.org/packages/danielmcassey/gekko)
