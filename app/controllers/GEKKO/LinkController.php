@@ -16,7 +16,7 @@ class LinkController extends \BaseController {
 
 		$shortenValidator = \Validator::make(\Input::all(),
 			array(
-				'url' 			=> 'required|active_url'
+				'url' 			=> 'required|url'
 			)
 		);
 
