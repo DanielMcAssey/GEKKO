@@ -14,9 +14,9 @@
  *
  * @return String
  */
-function appEnv($envKey, $default = 'Default')
+function appEnv($envKey, $default)
 {
-	if(isset($_ENV[$envKey]) && !empty($_ENV[$envKey]))
+	if(isset($_ENV[$envKey]))
 		return $_ENV[$envKey];
 	else
 		return $default;
