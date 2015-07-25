@@ -77,6 +77,6 @@ return array(
 	|
 	*/
 
-	'user_registration' => false,
+	'user_registration' => (appEnv('ENABLE_REGISTRATION', true) === 'true'),
 
 );
