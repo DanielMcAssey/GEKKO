@@ -176,13 +176,13 @@ class UserController extends \BaseController {
 		{
 			$user = \User::where('activation_code', '=', $id)->first();
 			if(!isset($user))
-				return Redirect::route('login')->with('flash_error', Lang::get('user.register_failure_invalid_code'));
+				return \Redirect::route('login')->with('flash_error', Lang::get('user.register_failure_invalid_code'));
 
 			$user->activation_code = '';
 			$user->is_activated = true;
 			$user->save();
 
-			return Redirect::route('login')->with('flash_notice', Lang::get('user.register_success_confirm'));
+			return \Redirect::route('login')->with('flash_notice', Lang::get('user.register_success_confirm'));
 		}
 	}
 
