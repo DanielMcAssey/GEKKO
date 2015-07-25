@@ -49,7 +49,7 @@ return array(
 	|
 	*/
 
-	'use_https' => (appEnv('USE_HTTPS', false) === 'true'),
+	'use_https' => (appEnv('USE_HTTPS', false) == 'true'),
 
 	/*
 	|--------------------------------------------------------------------------
