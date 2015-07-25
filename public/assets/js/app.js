@@ -264,6 +264,11 @@ function InitializeApp() {
 		$("#api_key_input").focus();
 		$("#api_key_input").select();
 	});
+	$("#shorten_url_output").click(function(e) {
+		e.preventDefault();
+		$("#shorten_url_output").focus();
+		$("#shorten_url_output").select();
+	});
 	$("button#btn_show_api_key").click(function(e) {
 		e.preventDefault();
 		$("#api_key_input").val("Retrieving...");
