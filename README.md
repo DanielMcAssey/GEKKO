@@ -12,9 +12,13 @@
 
 --TODO--
 
+## Demo
+
+You can view a live version of this project at [gek.pw](https://gek.pw)
+
 ## Documentation
 
-All documentation can be found on the [Wiki](https://github.com/DanielMcAssey/GEKKO/wiki)
+All documentation can be found on the [wiki](https://github.com/DanielMcAssey/GEKKO/wiki)
 
 ## License
 This project is licensed under the MIT license, please read LICENSE.txt for more information.
